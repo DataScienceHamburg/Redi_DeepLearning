@@ -5,15 +5,17 @@ from collections import Counter
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+# import random forest classifier
+from sklearn.ensemble import RandomForestClassifier
 
 # %% Load the data
 heart = pd.read_csv('data/heart.csv')
 heart.head()
 
 # %%
-sns.heatmap(heart.select_dtypes(include='number').corr(), annot=True)
+# sns.heatmap(heart.select_dtypes(include='number').corr(), annot=True)
 # %%
-sns.pairplot(heart, hue='HeartDisease')
+# sns.pairplot(heart, hue='HeartDisease')
 # %% Categorical Feature Treatment
 heart_dummies = pd.get_dummies(heart, dtype=float)
 heart_dummies.head()
@@ -39,7 +41,8 @@ X_test_scaled = scaler.transform(X_test)
 
 
 # %% Logistic Regression
-model = LogisticRegression()
+# model = LogisticRegression()
+model = RandomForestClassifier()
 model.fit(X_train_scaled, y_train)
 
 # %% Predictions
